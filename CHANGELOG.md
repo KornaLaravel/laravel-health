@@ -2,6 +2,12 @@
 
 All notable changes to `laravel-health` will be documented in this file.
 
+## 1.40.1 - 2026-07-22
+
+### Fixed
+
+- Add `static` return types to `Check::if()` and `Check::unless()` so chaining them no longer degrades to `mixed` under PHPStan (#320, fixes #319)
+
 ## 1.40.0 - 2026-05-28
 
 ### What's Changed
