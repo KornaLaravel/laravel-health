@@ -13,9 +13,8 @@ class BackupFile
     protected ?SymfonyFile $file = null;
 
     /**
-     * $size and $lastModified may be passed when they are already known — a
-     * directory listing returns both for every file, so supplying them avoids
-     * a metadata request per file.
+     * Pass $size and $lastModified when they are already known, so the disk
+     * does not have to be queried for them again.
      */
     public function __construct(
         protected string $path,
@@ -36,11 +35,7 @@ class BackupFile
 
     public function size(): int
     {
-        if ($this->size !== null) {
-            return $this->size;
-        }
-
-        return $this->file ? $this->file->getSize() : $this->disk->size($this->path);
+        return $this->size ??= $this->file ? $this->file->getSize() : $this->disk->size($this->path);
     }
 
     public function lastModified(): ?int
@@ -55,10 +50,6 @@ class BackupFile
             }
         }
 
-        if ($this->lastModified !== null) {
-            return $this->lastModified;
-        }
-
-        return $this->file ? $this->file->getMTime() : $this->disk->lastModified($this->path);
+        return $this->lastModified ??= $this->file ? $this->file->getMTime() : $this->disk->lastModified($this->path);
     }
 }

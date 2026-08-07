@@ -160,9 +160,9 @@ class BackupsCheck extends Check
     }
 
     /**
-     * A directory listing already reports the size and last-modified time of
-     * every file, so reading them from it keeps the check to a single call.
-     * Listing a bucket of 300 backups previously cost 300 metadata requests.
+     * A directory listing already reports the size and last modified time of every
+     * file, so passing those along keeps the check to a single request instead of
+     * two more per backup.
      *
      * @return Collection<int, BackupFile>
      */
@@ -170,7 +170,7 @@ class BackupsCheck extends Check
     {
         $backupFiles = [];
 
-        foreach ($disk->getDriver()->listContents($this->locatedAt ?? '', false) as $attributes) {
+        foreach ($disk->getDriver()->listContents($this->locatedAt ?? '')->sortByPath() as $attributes) {
             if (! $attributes instanceof FileAttributes) {
                 continue;
             }
