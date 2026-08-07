@@ -2,6 +2,20 @@
 
 All notable changes to `laravel-health` will be documented in this file.
 
+## 1.40.2 - 2026-08-07
+
+### What's Changed
+
+* Add dedicated PHPStan static analysis CI job by @freekmurze in https://github.com/spatie/laravel-health/pull/321
+* Allow Guzzle 8 by @ziming in https://github.com/spatie/laravel-health/pull/323
+* Read backup metadata from the directory listing instead of one request per file by @grafst in https://github.com/spatie/laravel-health/pull/324
+
+### New Contributors
+
+* @grafst made their first contribution in https://github.com/spatie/laravel-health/pull/324
+
+**Full Changelog**: https://github.com/spatie/laravel-health/compare/1.40.1...1.40.2
+
 ## 1.40.1 - 2026-07-22
 
 ### Fixed
